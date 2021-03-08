@@ -13,18 +13,29 @@ database: 'bank'
 
 
 
+//Home
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + "/public/index.html");
+    
+});
 
-app.get('/test', (req, res) => {
-    res.sendFile(__dirname + "/public/data.html");
+//Accounts
+app.get('/accounts', (req, res) => {
+
+    //IF ADMIN
+    res.sendFile((__dirname + '/private/admin.html'));
+    //IF USER
+    res.sendFile((__dirname + '/private/user.html'));
+});
+
+//Log in
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + "/public/login.html");
     
 });
 
 
-app.get('/secret', (req, res) => {
-    res.sendFile((__dirname + '/private/secret.html'));
-    
-});
-
+//DATABASE REQUESTS
 app.get('/data',(req, res) => {
     
     connection.query('SELECT * FROM user', function (err, rows, fields) {

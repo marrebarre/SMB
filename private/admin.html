@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
     
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    <script>
-        
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Accounts</title>
 
+    <script>
         function getData(){
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-
+    
                 var data = JSON.parse(this.responseText); 
-
+    
                 document.getElementById("data").innerHTML = "Data:<br>";
                 for(var i= 0; i<data.length; i++){
                     document.getElementById("data").innerHTML += 
@@ -30,14 +30,45 @@
             xmlhttp.open("GET", "/data", true);
             xmlhttp.send();
         }
-
         getData();
-        
-
-        
- 
     </script>
+
+</head>
+
+<body>
+
+    <top>
+        
+        <a href="/">Home</a>
+        |
+        Accounts
+        |
+        <a href="/login">Log out</a>
+        
+    </top>
     
-    <h1 id="data"></h1>
-    
+    <left>
+    </left>
+
+    <mid>
+        <center><h1>Admin</h1></center>
+        <h1 id="data"></h1>
+    </mid>
+
+    <right></right>
+    <bottom>
+        - <a href="/">SMB</a> -
+    </bottom>
+
+
+
+
+
+
 </body>
+
+</html>
+
+
+
+
