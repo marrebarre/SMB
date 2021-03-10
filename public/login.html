@@ -12,9 +12,9 @@
 
     <top>
         
-        <a href="/">Home</a>
+        <a class="top" href="/">Home</a>
         |
-        <a href="/accounts">Accounts</a>
+        <a class="top" href="/accounts">Accounts</a>
         |
         Log in
         
@@ -24,12 +24,30 @@
     </left>
 
     <mid>
-        <center><h1>Log in</h1></center>
+        <nav>
+            <a class="mid" href="">Login</a>
+            |
+            <a class="mid" href="">Create New Account</a>
+            
+        </nav>
+        <center>
+
+            <form action="/validate" method="post">
+                
+                <input type="text" name="username" placeholder="Username"  value="">
+                <br>
+                <input type="password" name="password" placeholder="Password"  value="">
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+
+            
+        </center>
     </mid>
 
     <right></right>
     <bottom>
-        - <a href="/">SMB</a> -
+        - <a class="mid" href="/">SMB</a> -
     </bottom>
 
 
