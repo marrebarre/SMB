@@ -16,7 +16,7 @@
         |
         <a class="top" href="/accounts">Accounts</a>
         |
-        <a class="top" href="/login">Log in</a>
+        <a id="login" class="top" href="/login">Log in</a>
         
     </top>
     
@@ -78,3 +78,20 @@
 </body>
 
 </html>
+
+<script>
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var data = this.responseText;
+
+            document.getElementById("login").innerHTML = data;
+
+        }
+    };
+    xmlhttp.open("GET", "/loggedin", true);
+    xmlhttp.send();
+
+</script>

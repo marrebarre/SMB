@@ -324,6 +324,16 @@ app.post('/createNew', (req, res) => {
 });
 
 
+app.get('/loggedin', (req, res) => {
+
+    if (req.session && req.session.user) {
+        res.send("Log out");
+    } else {
+        res.send("Log in")
+    }
+
+});
+
 
 
 
