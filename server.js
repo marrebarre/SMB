@@ -10,7 +10,7 @@ var session = require('client-sessions');
 app.use(session({
     cookieName: 'session',
     secret: 'random_string_goes_here',
-    duration: 0.5 * 60 * 1000,
+    duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000,
 
 }));
@@ -63,6 +63,12 @@ app.get('/login', (req, res) => {
     req.session.reset();
     
 });
+app.get('/about', (req, res) => {
+    res.sendFile(__dirname + "/public/about.html");
+    
+    
+});
+
 
 
 //DATABASE REQUESTS
@@ -75,6 +81,8 @@ app.get('/balance',(req, res) => {
         res.json(rows);
     })
 });
+
+
 
 app.post('/validate',(req, res) => {
     
@@ -93,22 +101,76 @@ app.post('/validate',(req, res) => {
     })
 });
 
-app.post('/validate',(req, res) => {
+app.post('/getusers',(req, res) => {
     
-    var sql = "SELECT * FROM user WHERE username='";
+    var sql = "SELECT * FROM user WHERE id='"+req.body.id+"' OR username LIKE '%"+req.body.id+"%'";
 
     connection.query(sql, function (err, rows, fields) {
         if (err) throw err
 
-        if(rows.length == 0){
-            res.send("No user found.")
-        }else{
-            
-            res.json(rows);
-        }
+        res.json(rows);
+        console.log(rows.length);
         
     })
 });
+
+app.post('/saveuser',(req, res) => {
+    
+    
+    var sql1 = "UPDATE user SET username='"+req.body.username+"' WHERE id='"+req.body.id+"'";
+    var sql2 =    "UPDATE user SET password='"+req.body.password+"' WHERE id='"+req.body.id+"'";
+    var sql3 =  "UPDATE user SET admin='"+req.body.admin+"' WHERE id='"+req.body.id+"'";
+    
+    
+    connection.query(sql1);
+    connection.query(sql2);
+    connection.query(sql3);
+
+   res.send(req.body);
+
+});
+
+
+
+app.post('/transfer',(req, res) => {
+    
+    
+    var sqlReduce = "UPDATE account SET balance= balance - "+req.body.amount+" WHERE id='"+req.body.from+"'";
+    var sqlAdd = "UPDATE account SET balance= balance + "+req.body.amount+" WHERE id='"+req.body.to+"'";
+
+    connection.query(sqlReduce);
+    connection.query(sqlAdd);
+
+   res.send(req.body);
+
+});
+
+app.post('/removeaccount',(req, res) => {
+    
+    
+    var sql = "DELETE FROM account WHERE id='"+req.body.id+"'";
+
+    connection.query(sql);
+    
+  
+   res.send(req.body);
+
+});
+
+app.post('/addaccount',(req, res) => {
+    
+    
+    var sql = "INSERT INTO account (name, balance, user_id)"+
+    " VALUES ('"+req.body.name+"', '0', "+req.session.user.id+")";
+
+    connection.query(sql);
+    
+  
+   res.send(req.body);
+
+});
+
+
 
 app.get('/status',(req, res) => {
     
