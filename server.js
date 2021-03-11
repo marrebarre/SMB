@@ -120,71 +120,71 @@ app.post('/getusers', (req, res) => {
     })
 });
 
-app.post('/getuser',(req, res) => {
-    
-    var sql = "SELECT * FROM user WHERE id='"+req.body.id+"'";
+app.post('/getuser', (req, res) => {
 
-    connection.query(sql, function (err, rows, fields) {
+    var sql = "SELECT * FROM user WHERE id='" + req.body.id + "'";
+
+    connection.query(sql, function(err, rows, fields) {
         if (err) throw err
 
         res.json(rows);
         console.log(rows.length);
-        
+
     })
 });
 
-app.post('/getaccounts',(req, res) => {
-    
-    var sql = "SELECT * FROM account WHERE id='"+req.body.id+"' OR user_id='"+req.body.id+"'";
+app.post('/getaccounts', (req, res) => {
 
-    connection.query(sql, function (err, rows, fields) {
+    var sql = "SELECT * FROM account WHERE id='" + req.body.id + "' OR user_id='" + req.body.id + "'";
+
+    connection.query(sql, function(err, rows, fields) {
         if (err) throw err
 
         res.json(rows);
         console.log(rows.length);
-        
+
     })
 });
 
-app.post('/getaccount',(req, res) => {
-    
-    var sql = "SELECT * FROM account WHERE id='"+req.body.id+"'";
+app.post('/getaccount', (req, res) => {
 
-    connection.query(sql, function (err, rows, fields) {
+    var sql = "SELECT * FROM account WHERE id='" + req.body.id + "'";
+
+    connection.query(sql, function(err, rows, fields) {
         if (err) throw err
 
         res.json(rows);
         console.log(rows.length);
-        
+
     })
 });
 
-app.post('/saveaccount',(req, res) => {
-    
-    
-    var sql1 = "UPDATE account SET name='"+req.body.name+"' WHERE id='"+req.body.id+"'";
-    var sql2 =    "UPDATE account SET balance='"+req.body.balance+"' WHERE id='"+req.body.id+"'";
-    
-    
-    
+app.post('/saveaccount', (req, res) => {
+
+
+    var sql1 = "UPDATE account SET name='" + req.body.name + "' WHERE id='" + req.body.id + "'";
+    var sql2 = "UPDATE account SET balance='" + req.body.balance + "' WHERE id='" + req.body.id + "'";
+
+
+
     connection.query(sql1);
     connection.query(sql2);
-    
 
-   res.send(req.body);
+
+    res.send(req.body);
 
 });
 
 
 
-app.post('/saveuser',(req, res) => {
-    
-    
-    var sql1 = "UPDATE user SET username='"+req.body.username+"' WHERE id='"+req.body.id+"'";
-    var sql2 =    "UPDATE user SET password='"+req.body.password+"' WHERE id='"+req.body.id+"'";
-    var sql3 =  "UPDATE user SET admin='"+req.body.admin+"' WHERE id='"+req.body.id+"'";
-    
-    
+app.post('/saveuser', (req, res) => {
+
+
+    var sql1 = "UPDATE user SET username='" + req.body.username + "' WHERE id='" + req.body.id + "'";
+    var sql2 = "UPDATE user SET password='" + req.body.password + "' WHERE id='" + req.body.id + "'";
+    var sql3 = "UPDATE user SET admin='" + req.body.admin + "' WHERE id='" + req.body.id + "'";
+
+
     connection.query(sql1);
     connection.query(sql2);
     connection.query(sql3);
@@ -337,4 +337,4 @@ app.get('/loggedin', (req, res) => {
 
 
 
-app.listen(80, () => console.log('Server running on port 80!'));
+app.listen(8080, () => console.log('Server running on port 8080!'));
