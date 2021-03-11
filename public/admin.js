@@ -4,6 +4,7 @@
 function userPressed(){
 
     document.getElementById("data").innerHTML="";
+    setFeedback("Search for UserID or Username.");
 
     document.getElementById("search").innerHTML = "<input type='text' id='userSearch' name='username'><br>";
     document.getElementById("search").innerHTML +="<input type='submit' onClick='getUsers()' value='Search'>";
@@ -131,6 +132,7 @@ function saveUser(id){
 function accountsPressed(){
 
     document.getElementById("data").innerHTML="";
+    setFeedback("Search for AccountID or UserID.");
 
     document.getElementById("search").innerHTML = "<input type='text' id='accountsSearch' ><br>";
     document.getElementById("search").innerHTML +="<input type='submit' onClick='getAccounts("+document.getElementById("accountsSearch").value+")' value='Search'>";
@@ -144,7 +146,7 @@ function accountsPressed(){
     }catch{}
 }
 
-function getAccounts(msg){
+function getAccounts(){
     id = document.getElementById("accountsSearch").value;
 
     console.log(id);
@@ -168,7 +170,8 @@ function getAccounts(msg){
                 "<td>" +data[i].name+"</td>"+
                 "<td>" +data[i].balance+"</td>"+
                 "<td>" +data[i].user_id+"</td>" + 
-                "<td><input style='width: fit-content;' type='button' value='Edit' onclick='editAccount("+data[i].id+")'></td></tr>";
+                "<td><input style='width: fit-content;' type='button' value='Edit' onclick='editAccount("+data[i].id+")'></td>"+
+                "<td><input style='width: fit-content;' type='button' value='Remove' onclick='removeAccount("+data[i].id+")'></td></tr>";
             
             }
 
@@ -211,6 +214,31 @@ function editAccount(id){
     
 }
 
+function removeAccount(id){
+    
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+
+    if (this.readyState == 4 && this.status == 200) {
+
+        //Response from server
+        var data = JSON.parse(this.responseText); 
+        getAccounts();
+           
+    }
+    };
+
+    postmsg = 
+    "id="+id;
+        
+    
+    xmlhttp.open("POST", "/removeaccount", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(postmsg);
+
+    
+}
+
 function saveAccount(id){
 
     name = document.getElementById("n").value;
@@ -247,6 +275,20 @@ function saveAccount(id){
 
 
     
+}
+
+function setFeedback(message = "") {
+    if (message != null) {
+        try {
+            document.getElementById("msg").innerHTML = message;
+        } catch {
+
+        }
+
+    } else {
+        document.getElementById("msg").innerHTML = "";
+    }
+
 }
 
 
