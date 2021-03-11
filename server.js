@@ -114,6 +114,63 @@ app.post('/getusers',(req, res) => {
     })
 });
 
+app.post('/getuser',(req, res) => {
+    
+    var sql = "SELECT * FROM user WHERE id='"+req.body.id+"'";
+
+    connection.query(sql, function (err, rows, fields) {
+        if (err) throw err
+
+        res.json(rows);
+        console.log(rows.length);
+        
+    })
+});
+
+app.post('/getaccounts',(req, res) => {
+    
+    var sql = "SELECT * FROM account WHERE id='"+req.body.id+"' OR user_id='"+req.body.id+"'";
+
+    connection.query(sql, function (err, rows, fields) {
+        if (err) throw err
+
+        res.json(rows);
+        console.log(rows.length);
+        
+    })
+});
+
+app.post('/getaccount',(req, res) => {
+    
+    var sql = "SELECT * FROM account WHERE id='"+req.body.id+"'";
+
+    connection.query(sql, function (err, rows, fields) {
+        if (err) throw err
+
+        res.json(rows);
+        console.log(rows.length);
+        
+    })
+});
+
+app.post('/saveaccount',(req, res) => {
+    
+    
+    var sql1 = "UPDATE account SET name='"+req.body.name+"' WHERE id='"+req.body.id+"'";
+    var sql2 =    "UPDATE account SET balance='"+req.body.balance+"' WHERE id='"+req.body.id+"'";
+    
+    
+    
+    connection.query(sql1);
+    connection.query(sql2);
+    
+
+   res.send(req.body);
+
+});
+
+
+
 app.post('/saveuser',(req, res) => {
     
     
@@ -180,6 +237,45 @@ app.get('/status',(req, res) => {
         res.redirect('/login');
     }
     
+});
+
+
+app.post('/createNew', (req, res) => {
+    var checking = "1234567890 [`!@#$%^&*()_+-=[]{};':|,.<>/?~]^[0-9]+$/";
+    var bool = false;
+
+    const uname = req.body.username;
+
+    for (var i = 0; i < checking.length; i++) {
+        if (uname.includes(checking.charAt(i))) {
+            bool = true;
+        }
+    }
+
+
+    if (bool) {
+        console.log("username contains errors");
+    } else {
+        var sqlCheckAccount = "SELECT * FROM user WHERE username='" + req.body.username + "'";
+        var sqlCreateAccount = "INSERT INTO user (username, password, admin) VALUES ('" + req.body.username + "', '" + req.body.password + "', '0')";
+
+        var sqlGetUser = "SELECT * FROM user WHERE username='" + req.body.username + "' AND password='" + req.body.password + "'";
+        connection.query(sqlCheckAccount, function(err, rows, fields) {
+            if (err) throw err
+            if (rows.length == 0) {
+                //we can create account
+                console.log("we can create account");
+                connection.query(sqlCreateAccount);
+                connection.query(sqlGetUser, function(err, rows, fields) {
+                    req.session.user = rows[0];
+                    res.redirect('/accounts');
+                });
+            } else {
+                console.log("Error, couldnt create account ");
+
+            }
+        })
+    }
 });
 
 
