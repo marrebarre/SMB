@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Accounts</title>
+    <title>Accounts - Overview</title>
 
 
 
@@ -19,6 +19,8 @@
 
         <a class="top" href="/">Home</a> | Accounts |
         <a class="top" href="/login">Log out</a>
+        <br>
+        <label id="displayUser"></label>
 
     </top>
 
@@ -27,19 +29,14 @@
 
     <mid>
         <nav>
-            <a class="mid" onclick="getOverview()">Overview</a> |
-            <a class="mid" onclick="getTransfer()">Transfer</a> |
-            <a class="mid" onclick="">Manage</a>
+            <a class="mid" id="overview" style="color: rgb(255, 174, 0)" onclick="getOverview()">Overview</a> |
+            <a class="mid" id="transfer" onclick="getTransfer()">Transfer</a> |
+            <a class="mid" id="manage" onclick="getManage()">Manage</a>
         </nav>
         <center>
-            <div id="data">
-
-            </div>
-
-
+            <div id=m sg></div>
+            <div id="data"></div>
         </center>
-
-
 
     </mid>
 

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="admin.js"></script>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Accounts</title>
+    <title>Admin</title>
 
    
 
@@ -29,18 +29,19 @@
 
     <mid>
         <nav>
-            <a class="mid" href="">Users</a>
+            <a class="mid" id="users" style="color: rgb(255, 174, 0)" onclick="userPressed()">Users</a>
             |
-            <a class="mid" href="">Accounts</a>
+            <a class="mid" id="accounts" onclick="accountsPressed()">Accounts</a>
             
         </nav>
         
-        <form action="/search" method="post">
-            
-            <input type="text" name="username"  value="">
-            <br>
-            <input type="submit" value="Search">
-        </form>
+        
+
+        <center>
+        <div id="search"></div>
+        <div  id="data"></div>
+        </center>
+        
         
         
     </mid>
@@ -61,5 +62,5 @@
 </html>
 
 
-
+<script src="admin.js"></script>
 

@@ -46,12 +46,10 @@ app.get('/accounts', (req, res) => {
                 break;
 
             default:
-                console.log("trying to log in from creation")
                 res.sendFile(__dirname + "/public/login.html");
                 break;
         }
     } else {
-        console.log("testing login from account creating")
         res.sendFile(__dirname + "/public/login.html");
     }
 
@@ -65,11 +63,18 @@ app.get('/login', (req, res) => {
     req.session.reset();
 
 });
+app.get('/about', (req, res) => {
+    res.sendFile(__dirname + "/public/about.html");
+
+
+});
+
 app.get('/register', (req, res) => {
     res.sendFile(__dirname + "/public/register.html");
     req.session.reset();
 
 });
+
 
 
 //DATABASE REQUESTS
@@ -82,6 +87,8 @@ app.get('/balance', (req, res) => {
         res.json(rows);
     })
 });
+
+
 
 app.post('/validate', (req, res) => {
 
@@ -100,6 +107,77 @@ app.post('/validate', (req, res) => {
     })
 });
 
+app.post('/getusers', (req, res) => {
+
+    var sql = "SELECT * FROM user WHERE id='" + req.body.id + "' OR username LIKE '%" + req.body.id + "%'";
+
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err
+
+        res.json(rows);
+        console.log(rows.length);
+
+    })
+});
+
+app.post('/saveuser', (req, res) => {
+
+
+    var sql1 = "UPDATE user SET username='" + req.body.username + "' WHERE id='" + req.body.id + "'";
+    var sql2 = "UPDATE user SET password='" + req.body.password + "' WHERE id='" + req.body.id + "'";
+    var sql3 = "UPDATE user SET admin='" + req.body.admin + "' WHERE id='" + req.body.id + "'";
+
+
+    connection.query(sql1);
+    connection.query(sql2);
+    connection.query(sql3);
+
+    res.send(req.body);
+
+});
+
+
+
+app.post('/transfer', (req, res) => {
+
+
+    var sqlReduce = "UPDATE account SET balance= balance - " + req.body.amount + " WHERE id='" + req.body.from + "'";
+    var sqlAdd = "UPDATE account SET balance= balance + " + req.body.amount + " WHERE id='" + req.body.to + "'";
+
+    connection.query(sqlReduce);
+    connection.query(sqlAdd);
+
+    res.send(req.body);
+
+});
+
+app.post('/removeaccount', (req, res) => {
+
+
+    var sql = "DELETE FROM account WHERE id='" + req.body.id + "'";
+
+    connection.query(sql);
+
+
+    res.send(req.body);
+
+});
+
+app.post('/addaccount', (req, res) => {
+
+
+    var sql = "INSERT INTO account (name, balance, user_id)" +
+        " VALUES ('" + req.body.name + "', '0', " + req.session.user.id + ")";
+
+    connection.query(sql);
+
+
+    res.send(req.body);
+
+});
+
+
+
 app.get('/status', (req, res) => {
 
     if (req.session && req.session.user) {
@@ -109,6 +187,7 @@ app.get('/status', (req, res) => {
     }
 
 });
+
 
 app.post('/createNew', (req, res) => {
     var checking = "1234567890 [`!@#$%^&*()_+-=[]{};':|,.<>/?~]^[0-9]+$/";
@@ -141,47 +220,15 @@ app.post('/createNew', (req, res) => {
                     res.redirect('/accounts');
                 });
             } else {
-                console.log("Error, couldnt create a ");
+                console.log("Error, couldnt create account ");
 
             }
         })
     }
-
-
-
-    /*if (nan(req.body.username) || format.test(req.body.username)) {
-        console.log("username contains errors");
-    } else {
-        var sqlCheckAccount = "SELECT * FROM user WHERE username='" + req.body.username + "'";
-        var sqlCreateAccount = "INSERT INTO user (username, password, admin) VALUES ('" + req.body.username + "', '" + req.body.password + "', '0')";
-
-        var sqlGetUser = "SELECT * FROM user WHERE username='" + req.body.username + "' AND password='" + req.body.password + "'";
-        connection.query(sqlCheckAccount, function(err, rows, fields) {
-            if (err) throw err
-            if (rows.length == 0) {
-                //we can create account
-                console.log("we can create account");
-                connection.query(sqlCreateAccount);
-                connection.query(sqlGetUser, function(err, rows, fields) {
-                    req.session.user = rows[0];
-                    res.redirect('/accounts');
-                });
-            } else {
-                console.log("Error, couldnt create a ");
-
-            }
-        })
-    }*/
 });
 
 
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
 
-function nan(num) {
-    return !isNaN(num);
-}
 
 
 app.listen(8080, () => console.log('Server running on port 8080!'));
