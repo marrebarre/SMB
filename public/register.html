@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <title>Log in</title>
 </head>
-
-
+<script>
+    function msgError() {
+        document.getElementById("msg").innerHTML = "Username can only contain letters";
+    }
+</script>
 
 <body>
 
@@ -25,28 +28,27 @@
 
     <mid>
         <nav>
-            Log in |
-            <a class="mid" href="/register">Create New Account</a>
+            <a class="mid" href="/login">Login</a> | Create New Account
 
         </nav>
         <center>
 
-            <div aria-disabled="" id="msg"> </div>
+            <div id="msg"></div>
 
-            <form action="/validate" method="post">
+            <form action="/createNew" method="post">
 
-                <input type="text" name="username" placeholder="Username" value="">
+                <input type="text" name="username" placeholder="Username" required="required">
                 <br>
-                <input type="password" name="password" placeholder="Password" value="">
+                <input type="password" name="password" placeholder="Password" required="required">
                 <br>
-                <input type="submit" value="Submit" onclick="setTimeout(msgError, 500)">
+                <input type="submit" value="Create account" style="width: 50%;" onclick="setTimeout(msgError, 500)">
+
             </form>
 
-            <script>
-                function msgError() {
-                    document.getElementById("msg").innerHTML = "Wrong username or password";
-                }
-            </script>
+
+
+
+
         </center>
     </mid>
 
