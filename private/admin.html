@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin</title>
 
-   
+
 
 </head>
 
 <body>
 
     <top>
-        
-        <a class="top" href="/">Home</a>
-        |
-        Accounts
-        |
+
+        <a class="top" href="/">Home</a> | Accounts |
         <a class="top" href="/login">Log out</a>
-        
+
     </top>
-    
+
     <left>
     </left>
 
     <mid>
         <nav>
-            <a class="mid" id="users" style="color: rgb(255, 174, 0)" onclick="userPressed()">Users</a>
-            |
+            <a class="mid" id="users" style="color: rgb(255, 174, 0)" onclick="userPressed()">Users</a> |
             <a class="mid" id="accounts" onclick="accountsPressed()">Accounts</a>
-            
+
+            <br>
+            <label id="displayAdmin"></label>
+
         </nav>
-        
-        
+
+
 
         <center>
-        <div id=msg></div>
-        <div id="search"></div>
-        <div  id="data"></div>
+            <div id=msg></div>
+            <div id="search"></div>
+            <div id="data"></div>
         </center>
-        
-        
-        
+
+
+
     </mid>
 
     <right></right>
     <bottom>
-        
+
         - <a class="mid" href="/">SMB</a> -
     </bottom>
 
@@ -64,4 +64,3 @@
 
 
 <script src="admin.js"></script>
-

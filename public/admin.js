@@ -315,5 +315,22 @@ function setFeedback(message = "") {
 }
 
 
+function getAdmin() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var data = this.responseText;
+
+            document.getElementById("displayAdmin").innerHTML = "Logged in as: " + data.replace(/['"]+/g, '');
+
+        }
+    };
+    xmlhttp.open("GET", "/status", true);
+    xmlhttp.send();
+}
+//Check if there is session every sec
+setInterval(getAdmin(), 1000);
+
 
 userPressed();

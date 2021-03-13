@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,58 +12,47 @@
 
 <body>
 
-    <top >
-        
-        Home
-        |
-        <a class="top" href="/accounts">Accounts</a>
-        |
+    <top>
+
+        Home |
+        <a class="top" href="/accounts">Accounts</a> |
         <a id="login" class="top" href="/login">Log in</a>
-        
+
     </top>
-    
+
     <left>
     </left>
 
     <mid>
         <nav>
-            <a class="mid" href="/">News</a>
-            |
-            About
-            
+            <a class="mid" href="/">News</a> | About
+            <br>
+            <label id="displayUser"></label>
+
         </nav>
 
-       <center><div class="about">
-            
-                
-            <p>
-                <h2>Sebastian Mårtensson </h2> <br>
-                <img src="Sebastian.PNG" ><br>
-                Sebastian is the 'S' in SM Bank. 
-                His role in this project is 
-                lead developer. His area of work 
-                is mainly login & sign up
-                but also administration. His focus is
-                on the backend and 'Beneath the surface'
-                coding.
-            </p>
-        </div>
-        <div class="about">
-         <p>
-            <h2>Martin Malmberg</h2> <br>
-            <img src="Martin.PNG"> <br>
-            Martin is the 'M' in SM Bank.
-            His role in this project is lead developer & designer.
-            His area of work is mainly user-side & UI.
-            His focus is on the front-end and the user interaction
-            with the website and also admin functionalities on the backend.
-        
-        </p>
-        </div></center>
-        
-        
+        <center>
+            <div class="about">
 
-        
+
+                <p>
+                    <h2>Sebastian Mårtensson </h2> <br>
+                    <img src="Sebastian.PNG"><br> Sebastian is the 'S' in SM Bank. His role in this project is lead developer. His area of work is mainly login & sign up but also administration. His focus is on the backend and 'Beneath the surface' coding.
+                </p>
+            </div>
+            <div class="about">
+                <p>
+                    <h2>Martin Malmberg</h2> <br>
+                    <img src="Martin.PNG"> <br> Martin is the 'M' in SM Bank. His role in this project is lead developer & designer. His area of work is mainly user-side & UI. His focus is on the front-end and the user interaction with the website and
+                    also admin functionalities on the backend.
+
+                </p>
+            </div>
+        </center>
+
+
+
+
 
     </mid>
 
@@ -70,7 +61,7 @@
         - <a class="mid" href="/">SMB</a> -
     </bottom>
 
-    
+
 
 
 
@@ -80,7 +71,6 @@
 </html>
 
 <script>
-
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -93,5 +83,4 @@
     };
     xmlhttp.open("GET", "/loggedin", true);
     xmlhttp.send();
-
 </script>

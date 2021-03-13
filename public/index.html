@@ -1,40 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Home - News</title>
 </head>
 
 <body>
 
-    <top >
-        
-        Home
-        |
-        <a class="top" href="/accounts">Accounts</a>
-        |
+    <top>
+
+        Home |
+        <a class="top" href="/accounts">Accounts</a> |
         <a id="login" class="top" href="/login">Log in</a>
-        
+
     </top>
-    
+
     <left>
     </left>
 
     <mid>
         <nav>
-            News
-            |
+            News |
             <a class="mid" href="/about">About</a>
-            
+            <br>
+            <label id="displayUser"></label>
+
         </nav>
         <center>
-            
+            <div class="welcome">
+
+                <h6></h6>Welcome to SMB<br></h6>
+                <img src="bank.png" alt="Avatar" class="bank">
+                <p class="info">SMB is a financing webpage where you as a user or admin can interact with this website.<br>Down below you can read more about the different things you can do on this website.</p>
+
+                <br>
+
+            </div>
+
+            <div class="cards">
+
+
+                <div class="card">
+                    <p class="title">User</p>
+                    <div class="card_content">
+                        <p>As a user you can login with an existing user or create a new user. A user you can view, create and delete your banking accounts.<br><br><br></p>
+                    </div>
+
+                </div>
+
+
+
+                <div class="card">
+                    <p class="title">Admin</p>
+                    <div class="card_content">
+                        <p>As a admin you have privilage to search for users, where you can see their password and if they have admin privilage or not. <br> You can edit users bank accounts as well.</p>
+                    </div>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <p class="title">About us</p>
+                    <div class="card_content">
+                        <p>On "About" page you can read about the team behind this project.<br><br><br><br></p>
+                    </div>
+                    <div class="card_info">
+
+                        <a href="/about" class="card_link">View</a>
+                    </div>
+                </div>
+
+            </div>
+
+
         </center>
 
-        
+
 
     </mid>
 
@@ -43,7 +92,7 @@
         - <a class="mid" href="/">SMB</a> -
     </bottom>
 
-    
+
 
 
 
@@ -53,7 +102,6 @@
 </html>
 
 <script>
-
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -61,10 +109,10 @@
             var data = this.responseText;
 
             document.getElementById("login").innerHTML = data;
+            console.log(data);
 
         }
     };
     xmlhttp.open("GET", "/loggedin", true);
     xmlhttp.send();
-
 </script>

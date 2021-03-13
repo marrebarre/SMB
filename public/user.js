@@ -5,6 +5,8 @@ function getStatus() {
 
             var data = this.responseText;
 
+            document.getElementById("displayUser").innerHTML = "Logged in as: " + data.replace(/['"]+/g, '');
+
         }
     };
     xmlhttp.open("GET", "/status", true);
