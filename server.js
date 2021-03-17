@@ -7,6 +7,7 @@ app.use(bp.urlencoded({ extended: true }))
 var session = require('client-sessions');
 
 
+
 app.use(session({
     cookieName: 'session',
     secret: 'random_string_goes_here',
