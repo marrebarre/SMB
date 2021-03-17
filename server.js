@@ -6,6 +6,9 @@ app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 var session = require('client-sessions');
 
+const dotenv = require('dotenv').config();
+
+
 
 
 app.use(session({
@@ -18,12 +21,16 @@ app.use(session({
 
 
 //DATABASE
+const db_host = process.env.DB_HOST;
+const db_user = process.env.DB_USER;
+const db_password = process.env.DB_PASSWORD;
+const db_database = process.env.DB_DATABASE;
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'bank'
+    host: db_host,
+    user: db_user,
+    password: db_password,
+    database: db_database
 });
 
 
